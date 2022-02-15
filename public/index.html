@@ -1,18 +1,21 @@
 <!DOCTYPE html>
-<html>
-<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  </head>  
 <body>
-
-<div id="app">
-  <h1>{{ message }}</h1>
-</div>
-
-<script>
-var myObject = new Vue({
-  el: '#app',
-  data: {message: 'Hello Vue!'}
-})
-</script>
-
+  <body class="bg-light">
+    <noscript>
+      <strong
+        >We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work
+        properly without JavaScript enabled. Please enable it to
+        continue.</strong
+      >
+    </noscript>
+    <div id="app"></div>
 </body>
 </html>
