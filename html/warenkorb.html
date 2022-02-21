@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Warenkorb</title>
+    <script src="../src/components/CartEntity.vue"></script>
+</head>
+
+<body>
+    <div id="#shopping-cart" v-if="products">
+        <div v-for="product in products">
+            <li>{{product.ProduktEntity.name}}</li>
+            <li>{{product.amount}}</li>
+        </div>
+        <li>{{price}}</li>
+    </div>
+</body>
+
+</html>
