@@ -1,31 +1,29 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <header>
+      <button v-on:click="navigateTo('Cart')"> View Cart</button>
+       <button v-on:click="navigateTo('ProductList')"> View products</button>
+    </header>
+    {{page}}
+    
+    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <UserEntity></UserEntity>
-    <ProductEntity @buy="addToCart"></ProductEntity>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <h1>Product-List</h1>
+  
     <ProductList v-bind:product-entities="testList"></ProductList>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <h1>Cart</h1>
-    <CartEntity></CartEntity>
+
+
+     <Cart></Cart>
+   
+    <!-- <CartEntity></CartEntity> -->
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import ProductEntity from './components/ProductEntity.vue'
-import CartEntity from './components/CartEntity.vue'
-import UserEntity from './components/UserEntity.vue'
+// import HelloWorld from './components/HelloWorld.vue'
+// import ProductEntity from './components/ProductEntity.vue'
+// import CartEntity from './components/CartEntity.vue'
+import UserEntity from './components/UserEntity.vue';
+import Cart from './components/Cart.vue';
 import ProductList from "@/components/ProductList";
 
 const testList = [
@@ -64,26 +62,33 @@ export default {
   name: 'App',
   components: {
     ProductList,
-    HelloWorld,
-    ProductEntity,
-    CartEntity,
+    // HelloWorld,
+    // ProductEntity,
+    // CartEntity,
+    Cart,
     UserEntity
+  },
+  methods: {
+      navigateTo(page) {
+        this.page = page
+      }
   },
   data() {
     return {
       testList: testList,
-      test: ''
+      test: '',
+      currenComponent : 'ProductList'
     }
   },
-  methods:{
-    addToCart(id){
-      console.log("Add To Cart"+id)
-    }
-  }
 }
 </script>
 
 <style>
+
+body {
+  margin: 0; 
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
