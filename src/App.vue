@@ -1,9 +1,14 @@
 <template>
-  <div id="app">
-    <header>
+<div id="nav">
+    <router-link to="/">Home</router-link>
+<Navbar></Navbar>
+<router-view/>
+
+    <Header title="ArtShop"/>
+       <ProductPage></ProductPage>    
       <button v-on:click="navigateTo('Cart')"> View Cart</button>
        <button v-on:click="navigateTo('ProductList')"> View products</button>
-    </header>
+
     {{page}}
     
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
@@ -11,7 +16,7 @@
   
     <ProductList v-bind:product-entities="testList"></ProductList>
 
-
+ 
      <Cart></Cart>
    
     <!-- <CartEntity></CartEntity> -->
@@ -24,7 +29,10 @@
 // import CartEntity from './components/CartEntity.vue'
 import UserEntity from './components/UserEntity.vue';
 import Cart from './components/Cart.vue';
+import Header from './components/Header.vue'
 import ProductList from "@/components/ProductList";
+import Navbar from './components/Navbar.vue'; 
+import ProductPage from './views/ProductPage.vue'; 
 
 const testList = [
   {
@@ -66,7 +74,10 @@ export default {
     // ProductEntity,
     // CartEntity,
     Cart,
-    UserEntity
+    UserEntity,
+    Header,
+    Navbar,
+    ProductPage
   },
   methods: {
       navigateTo(page) {
@@ -96,5 +107,26 @@ body {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+
+#nav {
+  padding: 30px;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#nav a.router-link-exact-active {
+  color: #42b983;
 }
 </style>

@@ -8,7 +8,7 @@
       <h2>{{ productEntity.price }}€</h2>
       <h3>{{productEntity.description}}</h3>
       <img v-bind:src="productEntity.picture" width="500" height="250">
-      <button v-on:click="addItemToCart(product)">Add to Cart</button>
+      <button v-on:click="addItemToCart(productEntity.id)">Add to Cart</button>
     </div>
     </div>
   </div>
@@ -32,6 +32,7 @@ export default {
   methods: {
     addItemToCart(product) {
       this.cart.push(product); 
+      console.log(product);
     }
   }, 
 };
