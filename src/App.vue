@@ -9,7 +9,7 @@
     <Header title="ArtShop"/>
        <ProductPage></ProductPage>    
 
-    
+    <Commissions></Commissions>
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <UserEntity></UserEntity>
   
@@ -32,6 +32,7 @@ import Header from './components/Header.vue'
 import ProductList from "@/components/ProductList";
 import Navbar from './components/Navbar.vue'; 
 import ProductPage from './components/ProductPage.vue'; 
+import Commissions from './components/Commissions.vue'
 
 const testList = [
   {
@@ -76,7 +77,8 @@ export default {
     UserEntity,
     Header,
     Navbar,
-    ProductPage
+    ProductPage, 
+    Commissions
   },
 
   data() {

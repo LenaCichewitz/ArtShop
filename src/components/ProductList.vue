@@ -40,7 +40,7 @@ export default {
   methods: {
     fetchData() {
       axios
-        .get("http://localhost/get.php")
+        .get("http://localhost/test/get.php")
         .then((response) => (this.productList = response.data));
     },
     addItemToCart(product) {
@@ -48,7 +48,7 @@ export default {
       console.log(product);
       axios
         .get(
-          "http://192.168.2.109:8081/add.php?text=" +
+          "http://localhost/test/add.php?text=" +
             encodeURIComponent(this.todo_neu)
         )
         .then((response) => (this.productList = response.data))
