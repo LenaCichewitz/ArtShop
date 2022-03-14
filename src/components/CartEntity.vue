@@ -16,42 +16,6 @@
 
 import ProductEntity from "@/components/ProductEntity";
 
-const testCart =
-    [
-      {
-        ProductEntity:
-            {
-              id: 1,
-              name: 'Apfel',
-              price: 1.50,
-              description: 'Rotes Obst',
-              picture: 'Hier könnte ihr Apfel stehen'
-            },
-        amount: 5
-      },
-      {
-        ProductEntity:
-            {
-              id: 2,
-              name: 'Birne',
-              price: 1.25,
-              description: 'Grünes Obst',
-              picture: 'Hier könnte ihre Birne stehen'
-            },
-        amount: 1
-      },
-      {
-        ProductEntity: {
-          id: 3,
-          name: 'Käse',
-          price: 2.50,
-          description: 'Gelbes Obst',
-          picture: 'Hier könnte ihre Käse stehen'
-        },
-        amount: 3
-      }
-    ];
-
 export default {
   data() {
     return {

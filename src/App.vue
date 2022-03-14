@@ -1,15 +1,14 @@
 <template>
 <div id="nav">
-    <router-link to="/">Home</router-link>
+      <!-- <router-link to="/">Home</router-link> | -->
+    <!-- <router-link to="/about">About</router-link> -->
+
 <Navbar></Navbar>
 <router-view/>
 
     <Header title="ArtShop"/>
        <ProductPage></ProductPage>    
-      <button v-on:click="navigateTo('Cart')"> View Cart</button>
-       <button v-on:click="navigateTo('ProductList')"> View products</button>
 
-    {{page}}
     
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <UserEntity></UserEntity>
@@ -32,7 +31,7 @@ import Cart from './components/Cart.vue';
 import Header from './components/Header.vue'
 import ProductList from "@/components/ProductList";
 import Navbar from './components/Navbar.vue'; 
-import ProductPage from './views/ProductPage.vue'; 
+import ProductPage from './components/ProductPage.vue'; 
 
 const testList = [
   {
@@ -79,11 +78,7 @@ export default {
     Navbar,
     ProductPage
   },
-  methods: {
-      navigateTo(page) {
-        this.page = page
-      }
-  },
+
   data() {
     return {
       testList: testList,
