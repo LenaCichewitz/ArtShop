@@ -1,34 +1,28 @@
 <template>
-  <div>
-    <header>{{ cart.length }} in cart</header>
-    <div id="ProductList">
-      <div class="products">
-        <div v-for="productEntity in productEntities" :key="productEntity.id">
-          <h1>{{ productEntity.name }}</h1>
-          <h2>{{ productEntity.price }}€</h2>
-          <h3>{{ productEntity.description }}</h3>
-          <img v-bind:src="productEntity.picture" width="500" height="250" />
-          <button v-on:click="addItemToCart(productEntity.id)">
-            Add to Cart
-          </button>
+  <div id="ProductList">
+    <header> 
+      <a href="#/Cart"><i class="fa fa-fw fa-shopping-cart"></i></a>{{ cart.length }} in cart</header>
+    <div class="products">
+      <div v-for="item in productList" :key="item.id">
+        <h1>{{ item.name }}</h1>
+        <h3>{{ item.description }}</h3>
+        <img v-bind:src="item.img" width="500" height="250" />
+        {{ item.price }} <br />
+        <div v-if="cart.includes(item.id)">
+          <button v-on:click="removeItemfromCart(item.id)">-</button><br />
         </div>
+        <button v-on:click="addItemToCart(item.id)">+</button>
       </div>
     </div>
-    
-    <li v-for="item in productList" :key="item.id">
-      {{ item.id }} - {{ item.name }}
-    </li>
   </div>
 </template>
+
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-import ProductEntity from "@/components/ProductEntity";
 
 export default {
-  el: "ProductList",
-  props: {
-    productEntities: ProductEntity,
-  },
+  el: "#ProductList",
+  name: "ProductList",
   data() {
     return {
       page: "ProductList",
@@ -38,30 +32,40 @@ export default {
     };
   },
   methods: {
-    fetchData() {
+    fetchData() {     
       axios
-        .get("http://localhost/test/get.php")
+        .get("http://localhost/ArtShop/src/model/getProducts.php")
         .then((response) => (this.productList = response.data));
     },
     addItemToCart(product) {
+
       this.cart.push(product);
-      console.log(product);
       axios
-        .get(
-          "http://localhost/test/add.php?text=" +
-            encodeURIComponent(this.todo_neu)
-        )
-        .then((response) => (this.productList = response.data))
+        .then((response) => this.productList.push(response.data))
         .then(
           function () {
             this.product = "";
             this.fetchData();
           }.bind(this)
         );
+        this.$ls.set('cart', "SDFasdf");  
+
     },
+    removeItemfromCart(productId) {
+      this.cart = this.cart.filter((element) => element !== productId);
+      this.$ls.set("cart", this.cart);
+    },
+    
   },
   created() {
     this.fetchData();
+  },
+  beforeCreate() {
+    this.fetchData();
+  },
+  mounted() {
+    this.$ls.set('cart', this.cart);  
+    this.$ls.on('cart', callback);
   },
 };
 </script>
@@ -80,5 +84,6 @@ header {
   text-align: right;
   font-size: 30px;
   padding-top: 20px;
+  
 }
 </style>

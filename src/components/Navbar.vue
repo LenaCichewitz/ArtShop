@@ -1,68 +1,73 @@
 <template>
-  <div id="nav">
-    <nav class="container navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">Art Shop</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <div class="navbar-nav mr-auto">
-          <router-link to="/" class="nav-item nav-link">Home</router-link>
-          <router-link to="/About" class="nav-item nav-link">About</router-link>
-          <router-link to="/Careers" class="nav-link">Careers</router-link>
-          <router-link to="/Contact" class="nav-link">Contact</router-link>
-        </div>
-      </div>
-    </nav>
+  <div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">  <h5>
+        <ul>
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#/ProductList">Produkte</a></li>
+          <li><a href="#/Commissions">Commissions</a></li>
+          <!-- <li style="float:right"><a href="#/Cart"><i class="fa fa-fw fa-shopping-cart"></i></a></li> -->
+        </ul>
+      </h5>
+    <component :is="currentView" />
   </div>
 </template>
 
-
 <script>
+import ProductList from "./ProductList.vue";
+import Commissions from "./Commissions.vue";
+import Cart from "./Cart.vue";
+
+const routes = {
+  "/ProductList": ProductList,
+  "/Commissions": Commissions,
+  "/Cart": Cart,
+};
+
 export default {
-  name: "NavBar",
-  props: {},
-  watch: {
-    localStorage: {
-      handler(val) {
-        console.log("val", val);
-      },
-    },
-  },
+  components: { ProductList },
   data() {
     return {
-      mainCategory: "Collections",
-      categories: [],
-      cartItems: [],
+      currentPath: window.location.hash,
     };
   },
+  computed: {
+    currentView() {
+      return routes[this.currentPath.slice(1) || "/"];
+    },
+  },
   mounted() {
-    const items = JSON.parse(localStorage.getItem("myCart"));
-    console.log("items", items);
-    this.cartItems = items;
+    window.addEventListener("hashchange", () => {
+      this.currentPath = window.location.hash;
+    });
   },
 };
 </script>
 <style scoped>
-.avatar:hover {
-  border: 2px solid hsl(256, 41%, 42%) !important;
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #111;
 }
-.category {
-  transition: 0.1s;
+
+li {
+  float: left;
+  color: white;
 }
-.category:hover {
-  border-bottom: 3px solid hsl(256, 41%, 42%);
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
 }
-.category:hover .text {
-  color: black !important;
+li a:hover {
+  background-color: #333;
+}
+h5 {
+  background-color: black;
+  color: white;
 }
 </style>

@@ -1,7 +1,7 @@
 
 <?php
 header('Content-Type: application/json');
-$pdo = new PDO('mysql:host=localhost;dbname=artshop', 'root', '');
+$pdo = new PDO('mysql:host=localhost;dbname=shop', 'root', '');
 $id = intval($_GET['id'] ?? 0);
 $statement = $pdo->prepare("DELETE FROM products WHERE id = ?");
 $ok = $statement->execute([$id]);
