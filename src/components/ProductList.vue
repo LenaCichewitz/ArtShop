@@ -19,6 +19,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
+import axios from 'axios';
 
 export default {
   el: "#ProductList",
@@ -38,7 +39,6 @@ export default {
         .then((response) => (this.productList = response.data));
     },
     addItemToCart(product) {
-
       this.cart.push(product);
       axios
         .then((response) => this.productList.push(response.data))
@@ -48,13 +48,14 @@ export default {
             this.fetchData();
           }.bind(this)
         );
-        this.$ls.set('cart', "SDFasdf");  
 
     },
     removeItemfromCart(productId) {
       this.cart = this.cart.filter((element) => element !== productId);
-      this.$ls.set("cart", this.cart);
     },
+    onCartClick() {
+        axios.get("")
+    }
     
   },
   created() {
@@ -62,10 +63,6 @@ export default {
   },
   beforeCreate() {
     this.fetchData();
-  },
-  mounted() {
-    this.$ls.set('cart', this.cart);  
-    this.$ls.on('cart', callback);
   },
 };
 </script>
